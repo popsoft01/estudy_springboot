@@ -15,4 +15,15 @@ public class Authority {
 //    private LearningParty user;
     @Enumerated(EnumType.STRING)
     private Role authority;
+
+
+
+
+    public Authority(Role role) {
+        this.authority = role;
+    }
+
+    public Authority() {
+
+    }
 }

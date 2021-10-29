@@ -1,11 +1,13 @@
 package com.estudy.estudy.data.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-//@Data
+@Data
+@NoArgsConstructor
 public class Authority {
     @Id
     @GeneratedValue
@@ -23,7 +25,5 @@ public class Authority {
         this.authority = role;
     }
 
-    public Authority() {
 
-    }
 }

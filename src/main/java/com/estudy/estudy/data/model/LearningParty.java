@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -23,12 +24,14 @@ public class LearningParty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotBlank
     @Column(unique = true, nullable = false)
     private String email;
     @NotNull @NotEmpty
     @Column(nullable = false)
     private String password;
+    private String duration;
     private  boolean eneble;
     @CreationTimestamp
     private LocalDateTime dateCreated;

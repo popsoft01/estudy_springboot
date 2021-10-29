@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,12 +52,28 @@ class LearningPartyRepositoryTest {
         assertThrows(DataIntegrityViolationException.class, ()->learningPartyRepository.save(user2));
     }
     @Test
-    void learningPathWithNullEmail(){
-       LearningParty user = new LearningParty("","",new Authority(Role.ROLE_STUDENT));
-        learningPartyRepository.save(user);
-        assertThat(user.getEmail()).isEqualTo(null);
-        assertThat(user.getId()).isNotNull();
-        assertThrows(DataIntegrityViolationException.class, ()->learningPartyRepository.save(user));
+    void learnPartyWithEmptyStringValuesTest(){
+
+        assertThrows(ConstraintViolationException.class,()-> new LearningParty(
+                "","",new Authority(Role.ROLE_STUDENT)
+        ));
+
+    }
+//    @Test
+//    void learningPathWithNullEmail(){
+//       LearningParty user = new LearningParty("","",new Authority(Role.ROLE_STUDENT));
+//        learningPartyRepository.save(user);
+//        assertThat(user.getEmail()).isEqualTo(null);
+//        assertThat(user.getId()).isNotNull();
+//        assertThrows(DataIntegrityViolationException.class, ()->learningPartyRepository.save(user));
+//    }
+
+    @Test
+    void findByUserNameTest(){
+        LearningParty learningParty = learningPartyRepository.findByEmail("ola@mail.com");
+        assertThat(learningParty).isNotNull();
+        assertThat(learningParty.getEmail()).isEqualTo("ola@mail.com");
+        log.info("Learning paty object --> {}", learningParty);
     }
 
     @AfterEach

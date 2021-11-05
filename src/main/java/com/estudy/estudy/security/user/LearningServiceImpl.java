@@ -25,7 +25,8 @@ public class LearningServiceImpl implements UserDetailsService {
           throw new UsernameNotFoundException("User with email does not exist");
       }
         getAuthorities(user.getAuthorities());
-        return new User(user.getEmail(),user.getPassword(),user.getAuthorities() );
+        return new User(user.getEmail(),user.getPassword(),
+               getAuthorities( user.getAuthorities()) );
     }
 
     private List<SimpleGrantedAuthority> getAuthorities

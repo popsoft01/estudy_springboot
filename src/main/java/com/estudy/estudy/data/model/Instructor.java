@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+
 @Builder
 @Entity
 @Data
@@ -21,18 +22,20 @@ public class Instructor {
     private Long id;
     @NotBlank
     @NotNull
+    @Column(nullable = false)
     private String firstname;
     @NotBlank
     @NotNull
+    @Column(nullable = false)
     private String lastname;
-    @Column(length = 1000)
-    private String bio;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @NotBlank
     @NotNull
     private String specialization;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-    @OneToOne
+    @Column(length = 1000)
+    private String bio;
+    @OneToOne(cascade = CascadeType.PERSIST)
     private LearningParty learningParty;
 
     @OneToMany

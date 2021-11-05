@@ -32,7 +32,7 @@ public class LearningParty {
     @Column(nullable = false)
     private String password;
     private String duration;
-    private  boolean eneble;
+    private  boolean enabled;
     @CreationTimestamp
     private LocalDateTime dateCreated;
     @OneToMany(cascade = CascadeType.PERSIST)
@@ -46,7 +46,7 @@ public class LearningParty {
         this.email = email;
         this.password = password;
         addAuthority(authorities);
-        this.eneble = false;
+        this.enabled = false;
 
     }
 

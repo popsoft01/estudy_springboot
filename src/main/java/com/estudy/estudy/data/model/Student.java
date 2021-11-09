@@ -18,5 +18,5 @@ public class Student {
     private Gender gender;
 
     @ManyToMany
-    private List<Course> courses;
+    private List<Course> enrolledCourses;
 }
